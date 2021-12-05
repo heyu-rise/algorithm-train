@@ -21,17 +21,17 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
 		if (postLeft > postRight) {
 			return null;
 		}
-        // 后序遍历的最后一个节点为根节点
+		// 后序遍历的最后一个节点为根节点
 		int rootVal = postorder[postRight];
 		TreeNode root = new TreeNode(rootVal);
-        // 找到中序便利中的根节点所在位置
+		// 找到中序便利中的根节点所在位置
 		int m = inLeft;
 		while (rootVal != inorder[m]) {
 			m++;
 		}
-        // inLeft~m - 1 为左子树的中序便利， 那么后序遍历从左到右（m - 1） - inLeft 个节点为左子树的后序遍历
+		// inLeft~m - 1 为左子树的中序便利， 那么后序遍历从左到右（m - 1） - inLeft 个节点为左子树的后序遍历
 		root.left = buildTree(inLeft, m - 1, postLeft, postLeft + (m - 1 - inLeft));
-        // m + 1~inRight 为右子树的中序便利，那么后序遍历从（postRight - 1）从右到左（m + 1 - right）个节点为右子树的后序遍历
+		// m + 1~inRight 为右子树的中序便利，那么后序遍历从（postRight - 1）从右到左（m + 1 - right）个节点为右子树的后序遍历
 		root.right = buildTree(m + 1, inRight, postRight - (inRight - m), postRight - 1);
 		return root;
 	}
